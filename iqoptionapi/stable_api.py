@@ -679,13 +679,15 @@ class IQ_Option:
                     pass
             time.sleep(polling_time)
 
-    def check_win_v3(self, id_number):
+    def check_win_v3(self, id_number, polling_time):
         while True:
             try:
                 
                 if self.get_async_order(id_number)["option-closed"] !={}:
                     break
+                time.sleep(polling_time)
             except:
+                time.sleep(polling_time)
                 pass
 
         return self.get_async_order(id_number)["option-closed"]["msg"]["profit_amount"]-self.get_async_order(id_number)["option-closed"]["msg"]["amount"]
